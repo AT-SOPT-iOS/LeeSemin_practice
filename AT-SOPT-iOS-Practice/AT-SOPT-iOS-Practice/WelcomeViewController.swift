@@ -45,7 +45,7 @@ class WelcomeViewController: UIViewController {
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.layer.cornerRadius = 6
         button.clipsToBounds = true
-        //        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -63,5 +63,13 @@ class WelcomeViewController: UIViewController {
     
     private func setUI() {
         view.addSubviews(imageView, titleLabel, loginButton, Button)
+    }
+    
+    @objc func backButtonTapped() {
+        if self.navigationController == nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

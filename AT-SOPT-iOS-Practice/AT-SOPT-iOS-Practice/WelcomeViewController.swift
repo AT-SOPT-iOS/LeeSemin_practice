@@ -9,6 +9,8 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    var id: String? = ""
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView(frame: UIScreen.centeredFrame(y: 87, width: 150, height: 150))
         imageView.contentMode = .scaleAspectFit
@@ -18,7 +20,6 @@ class WelcomeViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel(frame: UIScreen.centeredFrame(y: 295, width: 96, height: 60))
-        label.text = "???님\n반가워요!"
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -54,6 +55,7 @@ class WelcomeViewController: UIViewController {
         
         setStyle()
         setUI()
+        bindID()
     }
     
     private func setStyle() {
@@ -70,6 +72,19 @@ class WelcomeViewController: UIViewController {
             self.dismiss(animated: true)
         } else {
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func setLabelText(id: String?) {
+        self.id = id
+    }
+    
+    private func bindID() {
+        if let id = self.id, !id.isEmpty {
+            self.titleLabel.text = "\(id)님\n반가워요!"
+        }
+        else {
+            self.titleLabel.text = "???님\n반가워요!"
         }
     }
 }

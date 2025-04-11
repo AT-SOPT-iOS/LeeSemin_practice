@@ -69,6 +69,9 @@ class LoginViewController: UIViewController {
     @objc func loginButtonTapped() {
         let nextVC = WelcomeViewController()
         
+//        nextVC.id = idTextField.text
+        nextVC.setLabelText(id: idTextField.text)
+        
         // push
         self.navigationController?.pushViewController(nextVC, animated: true)
         

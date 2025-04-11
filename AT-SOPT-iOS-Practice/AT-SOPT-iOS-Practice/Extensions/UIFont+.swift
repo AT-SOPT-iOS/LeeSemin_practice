@@ -33,6 +33,6 @@ extension UIFont {
     }
     
     class var info12: UIFont {
-        return UIFont(name: "Pretandard-Regular", size: 12)!
+        return UIFont(name: "Pretendard-Regular", size: 12)!
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private let titleLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel(frame: UIScreen.centeredFrame(y: 163, width: 236, height: 60))
         label.text = "동네라서 가능한 모든 것\n당근에서 가까운 이웃과 함께해요."
         label.textColor = .black
@@ -65,19 +65,19 @@ class LoginViewController: UIViewController {
     }
     
     private func setUI() {
-        view.addSubviews(titleLabel, idTextField, passwordTextField, loginButton)
+        view.addSubviews(descriptionLabel, idTextField, passwordTextField, loginButton)
     }
     
     @objc func loginButtonTapped() {
         let nextVC = WelcomeViewController()
         
-//        nextVC.id = idTextField.text
+        //        nextVC.id = idTextField.text
         nextVC.setLabelText(id: idTextField.text)
         
         // push
         self.navigationController?.pushViewController(nextVC, animated: true)
         
         // 모달
-//        self.present(nextVC,animated: true)
+        //        self.present(nextVC,animated: true)
     }
 }

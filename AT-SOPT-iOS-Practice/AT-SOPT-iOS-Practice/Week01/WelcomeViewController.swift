@@ -11,14 +11,14 @@ class WelcomeViewController: UIViewController {
     
     var id: String? = ""
     
-    private let imageView: UIImageView = {
+    private let daangnImageView: UIImageView = {
         let imageView = UIImageView(frame: UIScreen.centeredFrame(y: 87, width: 150, height: 150))
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "Daangnee")
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private let welcomeLabel: UILabel = {
         let label = UILabel(frame: UIScreen.centeredFrame(y: 295, width: 96, height: 60))
         label.textColor = .black
         label.textAlignment = .center
@@ -27,7 +27,7 @@ class WelcomeViewController: UIViewController {
         return label
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var mainButton: UIButton = {
         let button = UIButton(frame: UIScreen.centeredFrame(y: 426, width: 335, height: 57))
         button.setTitle("메인으로", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -38,7 +38,7 @@ class WelcomeViewController: UIViewController {
         return button
     }()
     
-    private lazy var Button: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton(frame: UIScreen.centeredFrame(y: 498, width: 332, height: 58))
         button.backgroundColor = UIColor(red: 221/255, green: 222/255, blue: 227/255, alpha: 1)
         button.setTitle("다시 로그인", for: .normal)
@@ -64,7 +64,7 @@ class WelcomeViewController: UIViewController {
     }
     
     private func setUI() {
-        view.addSubviews(imageView, titleLabel, loginButton, Button)
+        view.addSubviews(daangnImageView, welcomeLabel, mainButton, backButton)
     }
     
     @objc func backButtonTapped() {
@@ -81,10 +81,10 @@ class WelcomeViewController: UIViewController {
     
     private func bindID() {
         if let id = self.id, !id.isEmpty {
-            self.titleLabel.text = "\(id)님\n반가워요!"
+            self.welcomeLabel.text = "\(id)님\n반가워요!"
         }
         else {
-            self.titleLabel.text = "???님\n반가워요!"
+            self.welcomeLabel.text = "???님\n반가워요!"
         }
     }
 }

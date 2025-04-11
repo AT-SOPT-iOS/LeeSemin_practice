@@ -9,6 +9,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private let navigationTypeSegmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["Push", "Modal"])
+        control.frame = UIScreen.centeredFrame(y: 100, width: 200, height: 30)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel(frame: UIScreen.centeredFrame(y: 163, width: 236, height: 60))
         label.text = "동네라서 가능한 모든 것\n당근에서 가까운 이웃과 함께해요."
@@ -65,19 +72,19 @@ class LoginViewController: UIViewController {
     }
     
     private func setUI() {
-        view.addSubviews(descriptionLabel, idTextField, passwordTextField, loginButton)
+        view.addSubviews(navigationTypeSegmentedControl, descriptionLabel, idTextField, passwordTextField, loginButton)
     }
     
     @objc func loginButtonTapped() {
         let nextVC = WelcomeViewController()
-        
-        //        nextVC.id = idTextField.text
         nextVC.setLabelText(id: idTextField.text)
         
-        // push
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-        // 모달
-        //        self.present(nextVC,animated: true)
+        if navigationTypeSegmentedControl.selectedSegmentIndex == 0 {
+            // Push
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            // Modal
+            self.present(nextVC, animated: true)
+        }
     }
 }

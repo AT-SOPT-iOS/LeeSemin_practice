@@ -63,9 +63,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setUI() {
-        [titleLabel, idTextField, passwordTextField, loginButton].forEach {
-            self.view.addSubview($0)
-        }
+        view.addSubviews(titleLabel, idTextField, passwordTextField, loginButton)
     }
     
     private static func centeredFrame(y: CGFloat, width: CGFloat, height: CGFloat) -> CGRect {

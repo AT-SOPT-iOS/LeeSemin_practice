@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         button.backgroundColor = UIColor(red: 255/255, green: 111/255, blue: 15/255, alpha: 1)
         button.layer.cornerRadius = 6
         button.clipsToBounds = true
-        //        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -64,5 +64,15 @@ class LoginViewController: UIViewController {
     
     private func setUI() {
         view.addSubviews(titleLabel, idTextField, passwordTextField, loginButton)
+    }
+    
+    @objc func loginButtonTapped() {
+        let nextVC = WelcomeViewController()
+        
+        // push
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        // 모달
+//        self.present(nextVC,animated: true)
     }
 }

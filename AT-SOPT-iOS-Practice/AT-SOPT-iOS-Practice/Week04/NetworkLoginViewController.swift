@@ -113,6 +113,7 @@ final class NetworkLoginViewController: UIViewController {
         nickNameTextField.addTarget(self, action: #selector(textFieldDidEditing(_:)), for: .allEvents)
         
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         infoViewButton.addTarget(self, action: #selector(infoViewButtonTapped), for: .touchUpInside)
     }
     
@@ -154,6 +155,35 @@ final class NetworkLoginViewController: UIViewController {
                 self.present(alert, animated: true)
                 
                 print("회원가입 에러:", error)
+            }
+        }
+    }
+    
+    @objc private func loginButtonTapped() {
+        Task {
+            do {
+                let response = try await LoginService.shared.postLoginData(loginId: self.id, password: self.password)
+                
+                let alert = UIAlertController(
+                    title: "로그인 성공",
+                    message: "환영합니다, ID: \(response.userId)",
+                    preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+            } catch {
+                let alert = UIAlertController(
+                    title: "로그인 실패",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                
+                print("로그인 에러:", error)
             }
         }
     }

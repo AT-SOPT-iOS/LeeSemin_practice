@@ -40,8 +40,8 @@ final class NetworkLoginViewController: UIViewController {
     private let loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.textColor = .black
-        $0.backgroundColor = UIColor(red: 0.96, green: 0.87, blue: 0.7, alpha: 1.0)
-        $0.layer.borderColor = UIColor(red: 0.96, green: 0.87, blue: 0.7, alpha: 1.0).cgColor
+        $0.backgroundColor = UIColor(red: 1.0, green: 0.95, blue: 0.7, alpha: 1.0)
+        $0.layer.borderColor = UIColor(red: 1.0, green: 0.95, blue: 0.7, alpha: 1.0).cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
     }
@@ -170,7 +170,10 @@ final class NetworkLoginViewController: UIViewController {
                     preferredStyle: .alert
                 )
                 
-                let okAction = UIAlertAction(title: "확인", style: .default)
+                let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                    let myPageVC = MyPageViewController()
+                    self.present(myPageVC, animated: true)
+                }
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
             } catch {

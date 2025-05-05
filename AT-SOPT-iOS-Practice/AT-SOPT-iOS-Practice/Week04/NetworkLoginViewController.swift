@@ -37,6 +37,15 @@ final class NetworkLoginViewController: UIViewController {
         $0.layer.cornerRadius = 10
     }
     
+    private let loginButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.titleLabel?.textColor = .black
+        $0.backgroundColor = UIColor(red: 0.96, green: 0.87, blue: 0.7, alpha: 1.0)
+        $0.layer.borderColor = UIColor(red: 0.96, green: 0.87, blue: 0.7, alpha: 1.0).cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 10
+    }
+    
     private let infoViewButton = UIButton().then {
         $0.setTitle("회원정보 조회", for: .normal)
         $0.titleLabel?.textColor = .black
@@ -60,7 +69,7 @@ final class NetworkLoginViewController: UIViewController {
     }
     
     private func setUI() {
-        view.addSubviews(idTextField, passwordTextField, nickNameTextField, registerButton, infoViewButton)
+        view.addSubviews(idTextField, passwordTextField, nickNameTextField, registerButton, loginButton, infoViewButton)
     }
     
     private func setLayout() {
@@ -81,11 +90,15 @@ final class NetworkLoginViewController: UIViewController {
             $0.top.equalTo(nickNameTextField.snp.bottom).offset(70)
         }
         
-        infoViewButton.snp.makeConstraints {
+        loginButton.snp.makeConstraints {
             $0.top.equalTo(registerButton.snp.bottom).offset(20)
         }
         
-        [idTextField, passwordTextField, nickNameTextField, registerButton, infoViewButton].forEach {
+        infoViewButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(20)
+        }
+        
+        [idTextField, passwordTextField, nickNameTextField, registerButton, loginButton, infoViewButton].forEach {
             $0.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
                 $0.width.equalTo(300)

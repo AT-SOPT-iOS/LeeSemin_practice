@@ -76,9 +76,9 @@ final class MyPageViewController: UIViewController {
     }
     
     private func setAddTargets() {
-        nickNameTextField.addTarget(self, action: #selector(textFieldDidEditing(_:)), for: .allEvents)
+        nickNameTextField.addTarget(self, action: #selector(textFieldDidEditing(_:)), for: .editingChanged)
         
-        //        changeButton.addTarget(self, action: #selector(), for: .touchUpInside)
+        changeButton.addTarget(self, action: #selector(changeButtonTapped), for: .touchUpInside)
     }
     
     @objc private func textFieldDidEditing(_ textField: UITextField) {
@@ -89,19 +89,67 @@ final class MyPageViewController: UIViewController {
         Task {
             do {
                 let nickname = try await GetInfoService.shared.fetchMyNickname(userId: self.userId)
-                
                 nickNameTextField.text = nickname
             } catch {
                 let alert = UIAlertController(
-                    title: "닉네임 조회 실패",
+                    title: "내 닉네임 조회 실패",
                     message: error.localizedDescription,
                     preferredStyle: .alert
                 )
+                
                 let okAction = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
                 
-                print("닉네임 조회 에러:", error)
+                print("내 닉네임 조회 에러:", error)
+            }
+        }
+    }
+    
+    @objc private func changeButtonTapped() {
+        guard !nickName.isEmpty else {
+            let alert = UIAlertController(
+                title: "저기요",
+                message: "수정할 닉네임을 입력해 주세요",
+                preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
+            
+            return
+        }
+        
+        Task {
+            do {
+                let response = try await UpdateInfoService.shared.updateNickname(userId: self.userId, newNickname: nickName)
+                
+                if let updatedNickname = response.data {
+                    nickNameTextField.text = updatedNickname
+                }
+                
+                let alert = UIAlertController(
+                    title: "닉네임 변경 완료",
+                    message: "닉네임이 성공적으로 변경되었습니다.",
+                    preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+            } catch {
+                let alert = UIAlertController(
+                    title: "닉네임 변경 실패",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                
+                print("닉네임 변경 에러:", error)
             }
         }
     }

@@ -12,7 +12,17 @@ import Then
 
 final class MyPageViewController: UIViewController {
     
+    private var userId: Int
     private var nickName: String = ""
+    
+    init(userId: Int) {
+        self.userId = userId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var nickNameTextField = UITextField().then {
         $0.placeholder = "닉네임"
@@ -36,6 +46,7 @@ final class MyPageViewController: UIViewController {
         setUI()
         setLayout()
         setAddTargets()
+        fetchNickname()
     }
     
     private func setStyle() {
@@ -72,5 +83,26 @@ final class MyPageViewController: UIViewController {
     
     @objc private func textFieldDidEditing(_ textField: UITextField) {
         self.nickName = textField.text ?? ""
+    }
+    
+    @objc private func fetchNickname() {
+        Task {
+            do {
+                let nickname = try await GetInfoService.shared.fetchMyNickname(userId: self.userId)
+                
+                nickNameTextField.text = nickname
+            } catch {
+                let alert = UIAlertController(
+                    title: "닉네임 조회 실패",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                
+                print("닉네임 조회 에러:", error)
+            }
+        }
     }
 }

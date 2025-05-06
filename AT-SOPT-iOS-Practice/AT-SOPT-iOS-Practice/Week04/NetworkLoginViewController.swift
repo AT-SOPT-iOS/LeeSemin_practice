@@ -171,7 +171,7 @@ final class NetworkLoginViewController: UIViewController {
                 )
                 
                 let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-                    let myPageVC = MyPageViewController()
+                    let myPageVC = MyPageViewController(userId: response.userId)
                     self.present(myPageVC, animated: true)
                 }
                 alert.addAction(okAction)

@@ -101,7 +101,7 @@ final class MyPageViewController: UIViewController {
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
                 
-                print("내 닉네임 조회 에러:", error)
+                print("내 닉네임 조회 에러: ", error)
             }
         }
     }
@@ -130,8 +130,8 @@ final class MyPageViewController: UIViewController {
                 }
                 
                 let alert = UIAlertController(
-                    title: "닉네임 변경 완료",
-                    message: "닉네임이 성공적으로 변경되었습니다.",
+                    title: "닉네임 변경 성공",
+                    message: "변경된 닉네임: \(nickName)",
                     preferredStyle: .alert
                 )
                 
@@ -149,7 +149,7 @@ final class MyPageViewController: UIViewController {
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
                 
-                print("닉네임 변경 에러:", error)
+                print("닉네임 변경 에러: ", error)
             }
         }
     }

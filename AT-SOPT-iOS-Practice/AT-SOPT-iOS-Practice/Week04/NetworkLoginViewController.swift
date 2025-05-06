@@ -154,7 +154,7 @@ final class NetworkLoginViewController: UIViewController {
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
                 
-                print("회원가입 에러:", error)
+                print("회원가입 에러: ", error)
             }
         }
     }
@@ -186,7 +186,7 @@ final class NetworkLoginViewController: UIViewController {
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
                 
-                print("로그인 에러:", error)
+                print("로그인 에러: ", error)
             }
         }
     }

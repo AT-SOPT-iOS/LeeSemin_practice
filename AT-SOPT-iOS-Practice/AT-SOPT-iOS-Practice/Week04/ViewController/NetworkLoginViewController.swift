@@ -144,6 +144,7 @@ final class NetworkLoginViewController: UIViewController {
                 let okAction = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(okAction)
                 self.present(alert, animated: true)
+                self.clearTextFields()
             } catch {
                 let alert = UIAlertController(
                     title: "계정 생성 실패",
@@ -194,5 +195,12 @@ final class NetworkLoginViewController: UIViewController {
     @objc private func infoViewButtonTapped() {
         let infoViewVC = InfoViewController()
         self.present(infoViewVC, animated: true)
+    }
+    
+    private func clearTextFields() {
+        [idTextField, passwordTextField, nickNameTextField].forEach { $0.text = "" }
+        id = ""
+        password = ""
+        nickName = ""
     }
 }

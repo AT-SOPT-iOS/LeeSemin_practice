@@ -125,10 +125,6 @@ final class MyPageViewController: UIViewController {
             do {
                 let response = try await UpdateInfoService.shared.updateNickname(userId: self.userId, newNickname: nickName)
                 
-                if let updatedNickname = response.data {
-                    nickNameTextField.text = updatedNickname
-                }
-                
                 let alert = UIAlertController(
                     title: "닉네임 변경 성공",
                     message: "변경된 닉네임: \(nickName)",

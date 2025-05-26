@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //        let navigationController = UINavigationController(rootViewController: NetworkLoginViewController())
         //        self.window?.rootViewController = navigationController
         
-        window?.rootViewController = UIHostingController(rootView: NavigationView { ProfileViewWithZStack() })
+        window?.rootViewController = UIHostingController(rootView: NavigationView { UserListView() })
         
         self.window?.makeKeyAndVisible()
     }
